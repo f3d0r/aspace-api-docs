@@ -3,13 +3,14 @@ title: API Reference
 
 language_tabs: # must be one of https://git.io/vQNgJ
   - shell
-  - ruby
   - python
   - javascript
 
 toc_footers:
-  - <a href='#'>Sign Up for a Developer Key</a>
-  - <a href='https://github.com/lord/slate'>Documentation Powered by Slate</a>
+  - <a href='https://trya.space/'>Main Website</a>
+  - <a href='https://lab.trya.space/'>Data Lab</a>
+  - <a href='https://api.trya.space/v1'>API</a>
+  - <a href='https://docs.trya.space/'>API Documentations</a>
 
 includes:
   - errors
