@@ -2,9 +2,10 @@
 title: aspace API
 
 language_tabs: # must be one of https://git.io/vQNgJ
-  - shell
-  - python
-  - javascript
+  - http: HTTP
+  - shell: cURL
+  - js: Node.js (request)
+  - python: Python
 
 toc_footers:
   - <a href='https://trya.space/'>Main Website</a>
