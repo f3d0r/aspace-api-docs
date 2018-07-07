@@ -4,7 +4,7 @@ title: aspace, Inc. API
 language_tabs: # must be one of https://git.io/vQNgJ
   - http: HTTP
   - shell: cURL
-  - js: Node.js (request)
+  - javascript: Node.js (request)
   - python: Python
 
 toc_footers:
@@ -21,53 +21,82 @@ search: true
 
 # Introduction
 
-Welcome to the aspace API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.
+Welcome to the aspace API! You can use this API to access the authentication, parking information, and administration endpoints, which can give you various information regarding the aspace applications.
 
-We have language bindings in Shell, Ruby, Python, and JavaScript! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
+To see samples of how to access this API, you can use the code examples on the dark area on the right, using the "HTTP", "cURL", "node.js (request), and Python tabs.
 
-This example API documentation page was created with [Slate](https://github.com/lord/slate). Feel free to edit it and use it as a base for your own API's documentation.
+Because this API is still in active development, there may be inconsistincies with actual API behavior and the described/intended behavior. In this case, please [contact](mailto:fedor@trya.space) Fedor Paretsky **as soon as possible** and include the following info:
 
-# Authentication
+* The endpoint affected
+* All of the information you sent to the endpoint, including the following
+  * Parameters/queries
+  * Body
+  * Headers
+* The information you received
+* Any error codes you received that aren't documented in this API documentation
 
-> To authorize, use this code:
+<aside class="notice">
+The base URL for all API endpoints is: <a href="https://api.trya.space/v1"><b>https://api.trya.space/v1</b></a>
+</aside>
 
-```ruby
-require 'kittn'
+# Main Endpoint
 
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-```
+## Testing Connection
 
-```python
-import kittn
+> To test your connection to the server, use this code:
 
-api = kittn.authorize('meowmeowmeow')
+```http
+GET /v1/ping HTTP/1.1
+Host: api.trya.space
+Cache-Control: no-cache
 ```
 
 ```shell
-# With shell, you can just pass the correct header with each request
-curl "api_endpoint_here"
-  -H "Authorization: meowmeowmeow"
+curl -X GET \
+  https://api.trya.space/v1/ping \
+  -H 'Cache-Control: no-cache'
 ```
 
 ```javascript
-const kittn = require('kittn');
+var request = require("request");
 
-let api = kittn.authorize('meowmeowmeow');
+var options = { method: 'GET',
+  url: 'https://api.trya.space/v1/ping',
+  headers:
+   {'Cache-Control': 'no-cache' } };
+
+request(options, function (error, response, body) {
+  if (error) throw new Error(error);
+
+  console.log(body);
+});
+
 ```
 
-> Make sure to replace `meowmeowmeow` with your API key.
+```python
+import http.client
 
-Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our [developer portal](http://example.com/developers).
+conn = http.client.HTTPConnection("api,trya,space")
 
-Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:
+headers = {
+    'Cache-Control': "no-cache"
+    }
 
-`Authorization: meowmeowmeow`
+conn.request("GET", "v1,ping", headers=headers)
 
-<aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
-</aside>
+res = conn.getresponse()
+data = res.read()
 
-# Kittens
+print(data.decode("utf-8"))
+```
+
+> If clicking [here](https://api.trya.space/v1) doesn't return anything for you, you probably shouldn't use our API without checking your computer first 😜, or the aspace servers are having a meltdown 😅.
+
+The purpose of this endpoint is to test the network connection with the aspace APIs. With a successful client connection (and if the server is functioning), the server will always return the following body:
+
+`pong`
+
+# Parking
 
 ## Get All Kittens
 
@@ -238,4 +267,3 @@ This endpoint deletes a specific kitten.
 Parameter | Description
 --------- | -----------
 ID | The ID of the kitten to delete
-
