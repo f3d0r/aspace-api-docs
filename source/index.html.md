@@ -1,5 +1,5 @@
 ---
-title: aspace API
+title: aspace, Inc. API
 
 language_tabs: # must be one of https://git.io/vQNgJ
   - http: HTTP
