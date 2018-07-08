@@ -98,7 +98,7 @@ The purpose of this endpoint is to test the network connection with the aspace A
 
 # Parking
 
-## Get All Kittens
+## Update Status
 
 ```ruby
 require 'kittn'
