@@ -9,40 +9,32 @@ Cache-Control: no-cache
 ```
 
 ```shell
-curl -X GET \
-  https://api.trya.space/v1/parking/ping \
-  -H 'Cache-Control: no-cache'
+curl --request GET \
+  --url https://api.trya.space/v1/parking/ping
 ```
 
 ```javascript
-var request = require('request');
+var request = require("request");
 
-var headers = {
-    'Cache-Control': 'no-cache'
-};
+var options = { method: 'GET', url: 'https://api.trya.space/v1/parking/ping' };
 
-var options = {
-    url: 'https://api.trya.space/v1/parking/ping',
-    headers: headers
-};
+request(options, function (error, response, body) {
+  if (error) throw new Error(error);
 
-function callback(error, response, body) {
-    if (!error && response.statusCode == 200) {
-        console.log(body);
-    }
-}
+  console.log(body);
+});
 
-request(options, callback);
 ```
 
 ```python
 import requests
 
-headers = {
-    'Cache-Control': 'no-cache',
-}
+url = "https://api.trya.space/v1/parking/ping"
 
-response = requests.get('https://api.trya.space/v1/parking/ping', headers=headers)
+payload = ""
+response = requests.request("GET", url, data=payload)
+
+print(response.text)
 ```
 
 This endpoint returns `pong` if the sub-API is working properly, and an error otherwise.
@@ -56,50 +48,40 @@ This endpoint returns `pong` if the sub-API is working properly, and an error ot
 ## Get Status by ID
 
 ```http
-GET /v1/parking/get_status?block_id=14 HTTP/1.1
+GET /v1/parking/get_status?block_id=12 HTTP/1.1
 Host: api.trya.space
-Cache-Control: no-cache
 ```
 
 ```shell
-curl -X GET \
-  'https://api.trya.space/v1/parking/get_status?block_id=14' \
-  -H 'Cache-Control: no-cache'
+curl --request GET \
+  --url 'https://api.trya.space/v1/parking/get_status?block_id=12'
 ```
 
 ```javascript
-var request = require('request');
+var request = require("request");
 
-var headers = {
-    'Cache-Control': 'no-cache'
-};
+var options = { method: 'GET',
+  url: 'https://api.trya.space/v1/parking/get_status',
+  qs: { block_id: '12' } };
 
-var options = {
-    url: 'https://api.trya.space/v1/parking/get_status?block_id=14',
-    headers: headers
-};
+request(options, function (error, response, body) {
+  if (error) throw new Error(error);
 
-function callback(error, response, body) {
-    if (!error && response.statusCode == 200) {
-        console.log(body);
-    }
-}
-
-request(options, callback);
+  console.log(body);
+});
 ```
 
 ```python
 import requests
 
-headers = {
-    'Cache-Control': 'no-cache',
-}
+url = "https://api.trya.space/v1/parking/get_status"
 
-params = (
-    ('block_id', '14')
-)
+querystring = {"block_id":"12"}
 
-response = requests.get('https://api.trya.space/v1/parking/get_status', headers=headers, params=params)
+payload = ""
+response = requests.request("GET", url, data=payload, params=querystring)
+
+print(response.text)
 ```
 
 > The above command returns JSON structured like this:
@@ -137,6 +119,122 @@ This endpoint returns a subset of parking spots matching the given spot_id, bloc
 | ------------------------- | --------------------------------------------- |
 | `spot_id` (one required)  | The spot_id of the parking spot.              |
 | `block_id` (one required) | The block_id of a selection of parking spots. |
+
+## Get Status by Bounding Box
+
+```http
+GET /v1/parking/get_status_bbox HTTP/1.1
+Host: api.trya.space
+User-Agent: insomnia/5.16.6
+Content-Type: application/json
+Accept: */*
+Content-Length: 110
+{
+  "sw": {
+    "lat": "47.612",
+    "lng": "-122.325"
+},
+  "ne": {
+    "lat": "47.615",
+    "lng": "-122.321"
+  }
+}
+```
+
+```shell
+curl --request GET \
+  --url https://api.trya.space/v1/parking/get_status_bbox \
+  --header 'content-type: application/json' \
+  --data '{
+  "sw": {
+    "lat": "47.612",
+    "lng": "-122.325"
+},
+  "ne": {
+    "lat": "47.615",
+    "lng": "-122.321"
+  }
+}'
+```
+
+```javascript
+var request = require("request");
+
+var options = { method: 'GET',
+  url: 'https://api.trya.space/v1/parking/get_status_bbox',
+  headers: { 'content-type': 'application/json' },
+  body:
+   { sw: { lat: '47.612', lng: '-122.325' },
+     ne: { lat: '47.615', lng: '-122.321' } },
+  json: true };
+
+request(options, function (error, response, body) {
+  if (error) throw new Error(error);
+
+  console.log(body);
+});
+```
+
+```python
+import requests
+
+url = "https://api.trya.space/v1/parking/get_status_bbox"
+
+payload = "{\n\t\"sw\": {\t\t\n\t\t\"lat\": \"47.612\",\n\t\t\"lng\": \"-122.325\"\n\t},\n\t\"ne\": {\n\t\t\"lat\": \"47.615\",\n\t\t\"lng\": \"-122.321\"\t\t\n\t}\n}"
+headers = {'content-type': 'application/json'}
+
+response = requests.request("GET", url, data=payload, headers=headers)
+
+print(response.text)
+```
+
+> Request Body:
+
+```json
+{
+  "sw": {
+    "lat": "47.612",
+    "lng": "-122.325"
+  },
+  "ne": {
+    "lat": "47.615",
+    "lng": "-122.321"
+  }
+}
+```
+
+> The above command returns JSON structured like this:
+
+```json
+[
+  {
+  "lng": -122.3215097929318,
+    "lat": 47.614974923505294,
+    "occupied": "F",
+    "block_id": 12,
+    "spot_id": 1286
+  },
+  {
+    "lng": -122.32145348673973,
+    "lat": 47.614935365765646,
+    "occupied": "F",
+    "block_id": 12,
+    "spot_id": 1287
+  },
+]
+```
+
+This endpoint returns a subset of parking spots that are inside of a bounding box formed by the southwest and northeast latitude/longitude pairs given in the body.
+
+<aside class="notice">The format of the body must exactly match the one described below for the request to successfully process.</aside>
+
+### HTTP Request
+
+`GET https://api.trya.space/v1/parking/get_status_bbox`
+
+### Request Body
+
+See on right after sample code.
 
 ## Check Block ID Exists
 

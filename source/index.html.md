@@ -10,7 +10,7 @@ language_tabs:
 toc_footers:
   - <a href='https://trya.space/'>Main Website</a>
   - <a href='https://lab.trya.space/'>Data Lab</a>
-  - <a href='https://api.trya.space/v1'>API</a>
+  - <a href='https://api.trya.space/'>API</a>
   - <a href='https://docs.trya.space/'>API Documentations</a>
 
 includes:
