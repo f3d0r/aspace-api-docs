@@ -20,6 +20,8 @@ Error Code | Meaning | HTTP Code
 20 | Missing Body - The request requires a body, but one was not sent with the request. | 422
 21 | Invalid Occupancy Status - An invalid occupancy status was given as part of the request. Only "T", "F", and "N" are allowed. | 422
 23 | Pin expired - An expired PIN was sent as part of the request during the authentication. A new PIN must be requested and used. | 403
+24 | Invalid Spot ID - No parking spots exist with the given Spot ID exist in the database. | 404
+25 | Invalid Spot or Block ID - No parking spots exist with both the given Spot and Block IDs in the database. | 404
 
 The aspace API uses the following custom success codes indicating behavior that is intended:
 
