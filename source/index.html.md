@@ -15,6 +15,8 @@ toc_footers:
 
 includes:
   - parking
+  - admin
+  - auth
   - errors
 
 search: true
@@ -39,3 +41,5 @@ Because this API is still in active development, there may be inconsistincies wi
 <aside class="notice">
 The base URL for all API endpoints is: <a href="https://api.trya.space/v1"><b>https://api.trya.space/v1</b></a>
 </aside>
+
+<aside class="warning">Methods require <b>all</b> parameters listed to successfully complete, unless otherwise specified.</aside>

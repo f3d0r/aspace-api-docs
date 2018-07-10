@@ -125,7 +125,6 @@ This endpoint returns a subset of parking spots matching the given spot_id, bloc
 ```http
 GET /v1/parking/get_status_bbox HTTP/1.1
 Host: api.trya.space
-User-Agent: insomnia/5.16.6
 Content-Type: application/json
 Accept: */*
 Content-Length: 110
@@ -226,11 +225,117 @@ print(response.text)
 
 This endpoint returns a subset of parking spots that are inside of a bounding box formed by the southwest and northeast latitude/longitude pairs given in the body.
 
-<aside class="notice">The format of the body must exactly match the one described below for the request to successfully process.</aside>
+<aside class="warning">The format of the body must exactly match the one described below for the request to successfully process.</aside>
 
 ### HTTP Request
 
 `GET https://api.trya.space/v1/parking/get_status_bbox`
+
+### Request Body
+
+See on right after sample code.
+
+## Get Status by Radius
+
+```http
+GET /parking/get_status_radius?radius_feet=500 HTTP/1.1
+Host: localhost:3000
+Content-Type: application/json
+Accept: */*
+Content-Length: 63
+{
+  "lat": "47.612887841508865",
+  "lng": "-122.32079463302121"
+}
+```
+
+```shell
+curl --request GET \
+  --url 'http://localhost:3000/parking/get_status_radius?radius_feet=500' \
+  --header 'content-type: application/json' \
+  --data '{
+	"lat": "47.612887841508865",
+	"lng": "-122.32079463302121"
+}'
+```
+
+```javascript
+var request = require("request");
+
+var options = { method: 'GET',
+  url: 'http://localhost:3000/parking/get_status_radius',
+  qs: { radius_feet: '500' },
+  headers: { 'content-type': 'application/json' },
+  body: { lat: '47.612887841508865', lng: '-122.32079463302121' },
+  json: true };
+
+request(options, function (error, response, body) {
+  if (error) throw new Error(error);
+
+  console.log(body);
+});
+```
+
+```python
+import requests
+
+url = "http://localhost:3000/parking/get_status_radius"
+
+querystring = {"radius_feet":"500"}
+
+payload = "{\n\t\"lat\": \"47.612887841508865\",\n\t\"lng\": \"-122.32079463302121\"\n}"
+headers = {'content-type': 'application/json'}
+
+response = requests.request("GET", url, data=payload, headers=headers, params=querystring)
+
+print(response.text)
+```
+
+> Request Body:
+
+```json
+{
+  "lat": "47.612887841508865",
+  "lng": "-122.32079463302121"
+}
+```
+
+> The above command returns JSON structured like this:
+
+```json
+[
+  {
+    "lng": -122.32079463302121,
+    "lat": 47.612887841508865,
+    "occupied": "F",
+    "block_id": 12,
+    "spot_id": 823,
+    "distance": 0
+  },
+  {
+    "lng": -122.32079513188872,
+    "lat": 47.61294266304671,
+    "occupied": "N",
+    "block_id": 12,
+    "spot_id": 824,
+    "distance": 0.003788020161908459
+  }
+]
+```
+
+This endpoint returns a subset of parking spots that are inside of a circle with radius (in feet) centered at the latitude/longitude pair given in the body.
+
+<aside class="warning">The format of the body must exactly match the one described below for the request to successfully process.</aside>
+
+### HTTP Request
+
+`GET https://api.trya.space/v1/parking/get_status_radius`
+
+### URL Parameters
+
+| Parameter | Description                    |
+| --------- | ------------------------------ |
+| `radius_feet` | The bounding circle's radius in feet. |
 
 ### Request Body
 
