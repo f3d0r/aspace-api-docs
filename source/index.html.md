@@ -29,7 +29,7 @@ Welcome to the aspace API! You can use this API to access the authentication, pa
 
 To see samples of how to access this API, you can use the code examples on the dark area on the right, using the "HTTP", "cURL", "node.js (request), and Python tabs.
 
-Because this API is still in active development, there may be inconsistincies with actual API behavior and the described/intended behavior. In this case, please [contact](mailto:help@trya.space) the API admin **as soon as possible** and include the following info:
+Because this API is still in active development, there may be inconsistencies with actual API behavior and the described/intended behavior. In this case, please [contact](mailto:help@trya.space) the API administrator **as soon as possible** and include the following info:
 
 * The endpoint affected
 * All of the information you sent to the endpoint, including the following

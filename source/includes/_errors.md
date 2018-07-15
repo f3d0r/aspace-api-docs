@@ -1,7 +1,7 @@
 # Errors
 
 <aside class="notice">
-Please note that there error/success codes are split into two sections based on intentended and not normal behavior.
+Please note that there error/success codes are split into two sections based on intended and not normal behavior.
 </aside>
 
 The aspace API uses the following custom error codes indicating behavior that isn't normal:
@@ -10,7 +10,7 @@ Error Code | Meaning | HTTP Code
 ---------- | ------- | ---------
 -1 | Missing Parameter - Your request is missing a parameter, specified in the info part of the return body. | 422
 4 | Invalid Pin - The pin given doesn't match the one sent during the authentication process. | 200
-5 | Database Error - An error occured on the backend during the query resulting in an error. | 500
+5 | Database Error - An error occurred on the backend during the query resulting in an error. | 500
 12 | Invalid Phone - The phone given is not valid. | 200
 13 | Invalid Auth Key - The authority key to complete the following request is not valid. | 403
 14 | Missing Auth Key - The request requires an authority key, but one was never sent as part of the request. | 401

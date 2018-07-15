@@ -43,7 +43,7 @@ This endpoint returns `pong` if the sub-API is working properly, and an error ot
 
 `GET https://api.trya.space/v1/parking/ping`
 
-<aside class="notice">If you are receiving an error with this endpoint for an extended period of time, please <a href="mailto:help@trya.space">send</a> the error you receieve to the API admin.</aside>
+<aside class="notice">If you are receiving an error with this endpoint for an extended period of time, please <a href="mailto:help@trya.space">send</a> the error you receive to the API admin.</aside>
 
 ## Get Status by ID
 
@@ -254,8 +254,8 @@ curl --request GET \
   --url 'http://localhost:3000/parking/get_status_radius?radius_feet=500' \
   --header 'content-type: application/json' \
   --data '{
-	"lat": "47.612887841508865",
-	"lng": "-122.32079463302121"
+  "lat": "47.612887841508865",
+  "lng": "-122.32079463302121"
 }'
 ```
 
