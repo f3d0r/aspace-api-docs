@@ -46,13 +46,13 @@ This endpoint returns `pong` if the sub-API is working properly, and an error ot
 ## Get Status by ID
 
 ```http
-GET /v1/parking/get_status?block_id=12 HTTP/1.1
+GET /v1/parking/get_status?block_id=3 HTTP/1.1
 Host: api.trya.space
 ```
 
 ```shell
 curl --request GET \
-  --url 'https://api.trya.space/v1/parking/get_status?block_id=12'
+  --url 'https://api.trya.space/v1/parking/get_status?block_id=3'
 ```
 
 ```javascript
@@ -60,7 +60,7 @@ var request = require("request");
 
 var options = { method: 'GET',
   url: 'https://api.trya.space/v1/parking/get_status',
-  qs: { block_id: '12' } };
+  qs: { block_id: '3' } };
 
 request(options, function (error, response, body) {
   if (error) throw new Error(error);
@@ -74,7 +74,7 @@ import requests
 
 url = "https://api.trya.space/v1/parking/get_status"
 
-querystring = {"block_id":"12"}
+querystring = {"block_id":"3"}
 
 payload = ""
 response = requests.request("GET", url, data=payload, params=querystring)
@@ -86,20 +86,22 @@ print(response.text)
 
 ```json
 [
-    {
-        "lng": -122.32494723593786,
-        "lat": 47.61643451627367,
-        "occupied": "F",
-        "block_id": 14,
-        "spot_id": 1292
-    },
-    {
-        "lng": -122.32489910551402,
-        "lat": 47.61639032483804,
-        "occupied": "F",
-        "block_id": 14,
-        "spot_id": 1293
-    }
+  {
+    "lng": -122.31808264747308,
+    "lat": 47.61426461982815,
+    "occupied": "F",
+    "parking_price": 2.5,
+    "block_id": 3,
+    "spot_id": 2620
+  },
+  {
+    "lng": -122.31808272044786,
+    "lat": 47.61427558423165,
+    "occupied": "F",
+    "parking_price": 2.5,
+    "block_id": 3,
+    "spot_id": 2621
+  }
 ]
 ```
 
@@ -121,35 +123,34 @@ This endpoint returns a subset of parking spots matching the given spot_id, bloc
 ## Get Status by Bounding Box
 
 ```http
-GET /v1/parking/get_status_bbox HTTP/1.1
+POST /v1/parking/get_status_bbox HTTP/1.1
 Host: api.trya.space
 Content-Type: application/json
-Accept: */*
-Content-Length: 110
+Content-Length: 84
 {
   "sw": {
-    "lat": "47.612",
-    "lng": "-122.325"
-},
+      "lng": -180,
+      "lat": -180
+  },
   "ne": {
-    "lat": "47.615",
-    "lng": "-122.321"
+      "lng": 180,
+      "lat": 180
   }
 }
 ```
 
 ```shell
-curl --request GET \
+curl --request POST \
   --url https://api.trya.space/v1/parking/get_status_bbox \
   --header 'content-type: application/json' \
   --data '{
   "sw": {
-    "lat": "47.612",
-    "lng": "-122.325"
-},
+    "lng": -180,
+    "lat": -180
+  },
   "ne": {
-    "lat": "47.615",
-    "lng": "-122.321"
+    "lng": 180,
+    "lat": 180
   }
 }'
 ```
@@ -157,12 +158,10 @@ curl --request GET \
 ```javascript
 var request = require("request");
 
-var options = { method: 'GET',
+var options = { method: 'POST',
   url: 'https://api.trya.space/v1/parking/get_status_bbox',
   headers: { 'content-type': 'application/json' },
-  body:
-   { sw: { lat: '47.612', lng: '-122.325' },
-     ne: { lat: '47.615', lng: '-122.321' } },
+  body: { sw: { lng: -180, lat: -180 }, ne: { lng: 180, lat: 180 } },
   json: true };
 
 request(options, function (error, response, body) {
@@ -177,10 +176,10 @@ import requests
 
 url = "https://api.trya.space/v1/parking/get_status_bbox"
 
-payload = "{\n\t\"sw\": {\t\t\n\t\t\"lat\": \"47.612\",\n\t\t\"lng\": \"-122.325\"\n\t},\n\t\"ne\": {\n\t\t\"lat\": \"47.615\",\n\t\t\"lng\": \"-122.321\"\t\t\n\t}\n}"
+payload = "{\n\t\"sw\": {\n\t\t\"lng\": -180,\n\t\t\"lat\": -180\n\t},\n\t\"ne\": {\n\t\t\"lng\": 180,\n\t\t\"lat\": 180\n\t}\n}"
 headers = {'content-type': 'application/json'}
 
-response = requests.request("GET", url, data=payload, headers=headers)
+response = requests.request("POST", url, data=payload, headers=headers)
 
 print(response.text)
 ```
@@ -190,12 +189,12 @@ print(response.text)
 ```json
 {
   "sw": {
-    "lat": "47.612",
-    "lng": "-122.325"
+    "lng": -180,
+    "lat": -180
   },
   "ne": {
-    "lat": "47.615",
-    "lng": "-122.321"
+    "lng": 180,
+    "lat": 180
   }
 }
 ```
@@ -205,29 +204,31 @@ print(response.text)
 ```json
 [
   {
-  "lng": -122.3215097929318,
-    "lat": 47.614974923505294,
-    "occupied": "F",
+    "lng": -122.32080361279635,
+    "lat": 47.613874629189766,
+    "occupied": "N",
+    "parking_price": 3.25,
     "block_id": 12,
-    "spot_id": 1286
+    "spot_id": 841
   },
   {
-    "lng": -122.32145348673973,
-    "lat": 47.614935365765646,
+    "lng": -122.32080411168269,
+    "lat": 47.613929450727575,
     "occupied": "F",
+    "parking_price": 3.25,
     "block_id": 12,
-    "spot_id": 1287
-  },
+    "spot_id": 842
+  }
 ]
 ```
 
-This endpoint returns a subset of parking spots that are inside of a bounding box formed by the southwest and northeast latitude/longitude pairs given in the body.
+This endpoint returns a subset of parking spots that are inside of a bounding box formed by the southwest and northeast latitude/longitude pairs given in the body of the request.
 
 <aside class="warning">The format of the body must exactly match the one described below for the request to successfully process.</aside>
 
 ### HTTP Request
 
-`GET https://api.trya.space/v1/parking/get_status_bbox`
+`POST https://api.trya.space/v1/parking/get_status_bbox`
 
 ### Request Body
 
@@ -236,35 +237,34 @@ See on right after sample code.
 ## Get Status by Radius
 
 ```http
-GET /parking/get_status_radius?radius_feet=500 HTTP/1.1
-Host: localhost:3000
+POST /v1/parking/get_status_radius?radius_feet=50 HTTP/1.1
+Host: api.trya.space
 Content-Type: application/json
-Accept: */*
-Content-Length: 63
+Content-Length: 40
 {
-  "lat": "47.612887841508865",
-  "lng": "-122.32079463302121"
+    "lng": -122.3208,
+    "lat": 47.613874
 }
 ```
 
 ```shell
-curl --request GET \
-  --url 'http://localhost:3000/parking/get_status_radius?radius_feet=500' \
+curl --request POST \
+  --url 'https://api.trya.space/v1/parking/get_status_radius?radius_feet=50' \
   --header 'content-type: application/json' \
   --data '{
-  "lat": "47.612887841508865",
-  "lng": "-122.32079463302121"
+  "lng": -122.3208,
+  "lat": 47.613874
 }'
 ```
 
 ```javascript
 var request = require("request");
 
-var options = { method: 'GET',
-  url: 'http://localhost:3000/parking/get_status_radius',
-  qs: { radius_feet: '500' },
+var options = { method: 'POST',
+  url: 'https://api.trya.space/v1/parking/get_status_radius',
+  qs: { radius_feet: '50' },
   headers: { 'content-type': 'application/json' },
-  body: { lat: '47.612887841508865', lng: '-122.32079463302121' },
+  body: { lng: -122.3208, lat: 47.613874 },
   json: true };
 
 request(options, function (error, response, body) {
@@ -277,14 +277,14 @@ request(options, function (error, response, body) {
 ```python
 import requests
 
-url = "http://localhost:3000/parking/get_status_radius"
+url = "https://api.trya.space/v1/parking/get_status_radius"
 
-querystring = {"radius_feet":"500"}
+querystring = {"radius_feet":"50"}
 
-payload = "{\n\t\"lat\": \"47.612887841508865\",\n\t\"lng\": \"-122.32079463302121\"\n}"
+payload = "{\n\t\"lng\": -122.3208,\n\t\"lat\": 47.613874\n}"
 headers = {'content-type': 'application/json'}
 
-response = requests.request("GET", url, data=payload, headers=headers, params=querystring)
+response = requests.request("POST", url, data=payload, headers=headers, params=querystring)
 
 print(response.text)
 ```
@@ -293,8 +293,8 @@ print(response.text)
 
 ```json
 {
-  "lat": "47.612887841508865",
-  "lng": "-122.32079463302121"
+  "lng": -122.3208,
+  "lat": 47.613874
 }
 ```
 
@@ -303,20 +303,22 @@ print(response.text)
 ```json
 [
   {
-    "lng": -122.32079463302121,
-    "lat": 47.612887841508865,
-    "occupied": "F",
+    "lng": -122.32080361279635,
+    "lat": 47.613874629189766,
+    "occupied": "N",
+    "parking_price": 3.25,
     "block_id": 12,
-    "spot_id": 823,
-    "distance": 0
+    "spot_id": 841,
+    "distance": 0.00017698109149932864
   },
   {
-    "lng": -122.32079513188872,
-    "lat": 47.61294266304671,
-    "occupied": "N",
+    "lng": -122.32080411168269,
+    "lat": 47.613929450727575,
+    "occupied": "F",
+    "parking_price": 3.25,
     "block_id": 12,
-    "spot_id": 824,
-    "distance": 0.003788020161908459
+    "spot_id": 842,
+    "distance": 0.0038368586332700873
   }
 ]
 ```
@@ -327,13 +329,117 @@ This endpoint returns a subset of parking spots that are inside of a circle with
 
 ### HTTP Request
 
-`GET https://api.trya.space/v1/parking/get_status_radius`
+`POST https://api.trya.space/v1/parking/get_status_radius`
 
 ### URL Parameters
 
 | Parameter | Description                    |
 | --------- | ------------------------------ |
 | `radius_feet` | The bounding circle's radius in feet. |
+
+## Get Min-Sized Parking Spots by Radius
+
+```http
+POST /v1/parking/get_min_size_parking?radius_feet=5000&spot_size_feet=10 HTTP/1.1
+Host: api.trya.space
+Content-Type: application/json
+Content-Length: 41
+{
+    "lng": -122.3208,
+    "lat": 47.613874
+}
+```
+
+```shell
+curl --request POST \
+  --url 'https://api.trya.space/v1/parking/get_min_size_parking?radius_feet=5000&spot_size_feet=10' \
+  --header 'content-type: application/json' \
+  --data '{
+  "lng": -122.3208,
+  "lat": 47.613874
+}
+```
+
+```javascript
+var request = require("request");
+
+var options = { method: 'POST',
+  url: 'https://api.trya.space/v1/parking/get_min_size_parking',
+  qs: { radius_feet: '5000', spot_size_feet: '10' },
+  headers: { 'content-type': 'application/json' },
+  body: { lng: -122.3208, lat: 47.613874 },
+  json: true };
+
+request(options, function (error, response, body) {
+  if (error) throw new Error(error);
+
+  console.log(body);
+});
+```
+
+```python
+import requests
+
+url = "https://api.trya.space/v1/parking/get_min_size_parking"
+
+querystring = {"radius_feet":"5000","spot_size_feet":"10"}
+
+payload = "{\n\t\"lng\": -122.3208,\n\t\"lat\": 47.613874\n}\n"
+headers = {'content-type': 'application/json'}
+
+response = requests.request("POST", url, data=payload, headers=headers, params=querystring)
+
+print(response.text)
+```
+
+> Request Body:
+
+```json
+{
+  "lng": -122.3208,
+  "lat": 47.613874
+}
+```
+
+> The above command returns JSON structured like this:
+
+```json
+[
+  {
+    "lng": -122.31808286639756,
+    "lat": 47.6142975130387,
+    "occupied": "F",
+    "parking_price": 2.5,
+    "block_id": 3,
+    "spot_id": 2623,
+    "distance": 0.12990350497275932
+  },
+  {
+    "lng": -122.31808323127233,
+    "lat": 47.614352335056275,
+    "occupied": "F",
+    "parking_price": 2.5,
+    "block_id": 3,
+    "spot_id": 2628,
+    "distance": 0.13079241931625346
+  }
+]
+```
+
+This endpoint returns a subset of parking spots that are inside of a circle with radius (in feet) centered at the latitude/longitude pair given in the body and are large enough for a car of `spot_size_feet`.
+
+<aside class="warning">The format of the body must exactly match the one described below for the request to successfully process.</aside>
+
+### HTTP Request
+
+`POST https://api.trya.space/v1/parking/get_status_radius`
+
+### URL Parameters
+
+| Parameter | Description                    |
+| --------- | ------------------------------ |
+| `radius_feet` | The bounding circle's radius in feet. |
+| `spot_size_feet` | The minimum open parking spot size in feet to search. |
 
 ### Request Body
 
@@ -342,61 +448,51 @@ See on right after sample code.
 ## Check Block ID Exists
 
 ```http
-GET /v1/parking/block_id_exists?block_id=1 HTTP/1.1
+GET /v1/parking/block_id_exists?block_id=5 HTTP/1.1
 Host: api.trya.space
-Cache-Control: no-cache
 ```
 
 ```shell
-curl -X GET \
-  'https://api.trya.space/v1/parking/block_id_exists?block_id=1' \
-  -H 'Cache-Control: no-cache'
+curl --request GET \
+  --url 'https://api.trya.space/v1/parking/block_id_exists?block_id=5'
 ```
 
 ```javascript
-var request = require('request');
+var request = require("request");
 
-var headers = {
-    'Cache-Control': 'no-cache'
-};
+var options = { method: 'GET',
+  url: 'https://api.trya.space/v1/parking/block_id_exists',
+  qs: { block_id: '5' } };
 
-var options = {
-    url: 'https://api.trya.space/v1/parking/block_id_exists?block_id=1',
-    headers: headers
-};
+request(options, function (error, response, body) {
+  if (error) throw new Error(error);
 
-function callback(error, response, body) {
-    if (!error && response.statusCode == 200) {
-        console.log(body);
-    }
-}
-
-request(options, callback);
+  console.log(body);
+});
 ```
 
 ```python
 import requests
 
-headers = {
-    'Cache-Control': 'no-cache',
-}
+url = "https://api.trya.space/v1/parking/block_id_exists"
 
-params = (
-    ('block_id', '1'),
-)
+querystring = {"block_id":"5"}
 
-response = requests.get('https://api.trya.space/v1/parking/block_id_exists', headers=headers, params=params)
+payload = ""
+response = requests.request("GET", url, data=payload, params=querystring)
+
+print(response.text)
 ```
 
 > The above command returns JSON structured like this:
 
 ```json
 {
-    "block_id_exists": "F"
+  "block_id_exists": "T"
 }
 ```
 
-This endpoint returns whether the given Block ID exists. It return `block_id_exists = "F"` if it doesn't and `block_id_exists = "T"` if it does.
+This endpoint returns whether the Block ID given exists. It returns true (`T`) if there is at least one spot exists that is assigned to the `block_id` or false (`F`) if there are no spots assigned to it.
 
 ### HTTP Request
 
@@ -407,3 +503,165 @@ This endpoint returns whether the given Block ID exists. It return `block_id_exi
 | Parameter | Description                    |
 | --------- | ------------------------------ |
 | `block_id` | The block ID you're checking exists. |
+
+## Update Spot Status
+
+<aside class="warning">This endpoint method requires an auth_key with the <code>update_status</code> permission. Please go <a href="https://api.trya.space/v1/admin/get_auth_key">here</a> if you need a new auth_key.</aside>
+
+```http
+POST /v1/parking/update_status?spot_id=841&occupied=N&auth_key=some-authentication-key HTTP/1.1
+Host: api.trya.space
+Content-Length: 0
+```
+
+```shell
+curl --request POST \
+  --url 'https://api.trya.space/v1/parking/update_status?spot_id=841&occupied=N&auth_key=some-authentication-key'
+```
+
+```javascript
+var request = require("request");
+
+var options = { method: 'POST',
+  url: 'https://api.trya.space/v1/parking/update_status',
+  qs:
+   { spot_id: '841',
+     occupied: 'N',
+     auth_key: 'some-authentication-key' } };
+
+request(options, function (error, response, body) {
+  if (error) throw new Error(error);
+
+  console.log(body);
+});
+```
+
+```python
+import requests
+
+url = "https://api.trya.space/v1/parking/update_status"
+
+querystring = {"spot_id":"841","occupied":"N","auth_key":"some-authentication-key"}
+
+payload = ""
+response = requests.request("POST", url, data=payload, params=querystring)
+
+print(response.text)
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "error": {
+    "error_code": 19,
+    "error_info": "spot_status_changed"
+  }
+}
+```
+
+This endpoint is used to update a single parking spot with an updated occupancy status. It requires an auth_key with authority to change parking spot statuses (`update_status`). The only allowable values for the `occupied` parameter are `T` (true), `F` (false), and `N` (not available). If a request is made to change the status of a spot that doesn't exist or the `occupied` parameter is not one of the allowed values, an error is returned.
+
+### HTTP Request
+
+`POST https://api.trya.space/v1/parking/update_status`
+
+### URL Parameters
+
+| Parameter | Description                    |
+| --------- | ------------------------------ |
+| `spot_id` | The spot ID of the spot status you're changing. |
+| `occupied` (Must be `T`, `F`, or `N`) | The updated occupancy status of the spot. |
+| `auth_key` | An auth_key that has the authority to change spot statuses (`update_status`). |
+
+## Upload Spots
+
+<aside class="warning">This endpoint method requires an auth_key with the <code>upload_spots</code> permission. Please go <a href="https://api.trya.space/v1/admin/get_auth_key">here</a> if you need a new auth_key.</aside>
+
+```http
+POST /v1/parking/upload_spots?block_id=11&auth_key=***REMOVED*** HTTP/1.1
+Host: api.trya.space
+Content-Type: application/json
+Content-Length: 166
+[
+    {
+      "lng": -122.32145622348536,
+      "lat": 47.61524252172283,
+      "block_id": 40
+    },
+    {
+      "lng": -122.32144809134007,
+      "lat": 47.61524258185267,
+      "block_id": 40
+  }
+]
+```
+
+```shell
+curl --request POST \
+  --url 'https://api.trya.space/v1/parking/upload_spots?block_id=11&auth_key=***REMOVED***' \
+  --header 'content-type: application/json' \
+  --data '[
+  {
+    "lng": -122.32145622348536,
+    "lat": 47.61524252172283,
+    "block_id": 40
+  },
+  {
+    "lng": -122.32144809134007,
+    "lat": 47.61524258185267,
+    "block_id": 40
+  }
+]'
+```
+
+```javascript
+var request = require("request");
+
+var options = { method: 'POST',
+  url: 'https://api.trya.space/v1/parking/upload_spots',
+  qs: { block_id: '11', auth_key: '***REMOVED***' },
+  headers: { 'content-type': 'application/json' },
+  body:
+   [ { lng: -122.32145622348536,
+       lat: 47.61524252172283,
+       block_id: 40 },
+     { lng: -122.32144809134007,
+       lat: 47.61524258185267,
+       block_id: 40 } ],
+  json: true };
+
+request(options, function (error, response, body) {
+  if (error) throw new Error(error);
+
+  console.log(body);
+});
+```
+
+```python
+import requests
+
+url = "https://api.trya.space/v1/parking/upload_spots"
+
+querystring = {"block_id":"11","auth_key":"***REMOVED***"}
+
+payload = "[\n\t{\n\t\t\"lng\": -122.32145622348536,\n\t\t\"lat\": 47.61524252172283,\n\t\t\"block_id\": 40\n\t},\n\t{\n\t\t\"lng\": -122.32144809134007,\n\t\t\"lat\": 47.61524258185267,\n\t\t\"block_id\": 40\n\t}\n]"
+headers = {'content-type': 'application/json'}
+
+response = requests.request("POST", url, data=payload, headers=headers, params=querystring)
+
+print(response.text)
+```
+
+This endpoint is used to upload/add new spots to the aspace database. It requires an `auth_key` with authority to upload parking spot statuses (`upload_spots`). The request body must be in the exact form as the code examples, or the request will fail. Upon the completion of a successful request, all the spots in the body will be added to the database with the given `block_id`. Upon success, the request will return the raw text `SUCCESS`. The `block_id` given in this request **does not** need to be unique for the request to be successful, but it is highly recommended to be unique.
+
+### HTTP Request
+
+`POST https://api.trya.space/v1/parking/upload_spots`
+
+### URL Parameters
+
+| Parameter | Description                    |
+| --------- | ------------------------------ |
+| `block_id` | The block ID assigned to be assigned to the uploaded spots. |
+| `auth_key` | An auth_key that has the authority to upload new spots (`upload_spots`). |
