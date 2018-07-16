@@ -43,7 +43,7 @@ This endpoint returns `pong` if the sub-API is working properly, and an error ot
 
 <aside class="notice">If you are receiving an error with this endpoint for an extended period of time, please <a href="mailto:help@trya.space">send</a> the error you receive to the API admin.</aside>
 
-## Get Status by ID
+## Get Spots by ID
 
 ```http
 GET /v1/parking/get_status?block_id=3 HTTP/1.1
@@ -120,7 +120,7 @@ This endpoint returns a subset of parking spots matching the given spot_id, bloc
 | `spot_id` (one required)  | The spot_id of the parking spot.              |
 | `block_id` (one required) | The block_id of a selection of parking spots. |
 
-## Get Status by Bounding Box
+## Get Spots in Bounding Box
 
 ```http
 POST /v1/parking/get_status_bbox HTTP/1.1
@@ -234,7 +234,7 @@ This endpoint returns a subset of parking spots that are inside of a bounding bo
 
 See on right after sample code.
 
-## Get Status by Radius
+## Get Spots in Radius
 
 ```http
 POST /v1/parking/get_status_radius?radius_feet=50 HTTP/1.1
@@ -337,7 +337,7 @@ This endpoint returns a subset of parking spots that are inside of a circle with
 | --------- | ------------------------------ |
 | `radius_feet` | The bounding circle's radius in feet. |
 
-## Get Min-Sized Parking Spots by Radius
+## Get Min-Sized Spots in Radius
 
 ```http
 POST /v1/parking/get_min_size_parking?radius_feet=5000&spot_size_feet=10 HTTP/1.1
@@ -579,7 +579,7 @@ This endpoint is used to update a single parking spot with an updated occupancy 
 <aside class="warning">This endpoint method requires an auth_key with the <code>upload_spots</code> permission. Please go <a href="https://api.trya.space/v1/admin/get_auth_key">here</a> if you need a new auth_key.</aside>
 
 ```http
-POST /v1/parking/upload_spots?block_id=11&auth_key=***REMOVED*** HTTP/1.1
+POST /v1/parking/upload_spots?auth_key=some-auth-key HTTP/1.1
 Host: api.trya.space
 Content-Type: application/json
 Content-Length: 166
@@ -599,7 +599,7 @@ Content-Length: 166
 
 ```shell
 curl --request POST \
-  --url 'https://api.trya.space/v1/parking/upload_spots?block_id=11&auth_key=***REMOVED***' \
+  --url 'https://api.trya.space/v1/parking/upload_spots?auth_key=some-auth-key' \
   --header 'content-type: application/json' \
   --data '[
   {
@@ -620,9 +620,9 @@ var request = require("request");
 
 var options = { method: 'POST',
   url: 'https://api.trya.space/v1/parking/upload_spots',
-  qs: { block_id: '11', auth_key: '***REMOVED***' },
+  qs: { auth_key: 'some-auth-key' },
   headers: { 'content-type': 'application/json' },
-  body:
+  body: 
    [ { lng: -122.32145622348536,
        lat: 47.61524252172283,
        block_id: 40 },
@@ -643,7 +643,7 @@ import requests
 
 url = "https://api.trya.space/v1/parking/upload_spots"
 
-querystring = {"block_id":"11","auth_key":"***REMOVED***"}
+querystring = {"auth_key":"some-auth-key"}
 
 payload = "[\n\t{\n\t\t\"lng\": -122.32145622348536,\n\t\t\"lat\": 47.61524252172283,\n\t\t\"block_id\": 40\n\t},\n\t{\n\t\t\"lng\": -122.32144809134007,\n\t\t\"lat\": 47.61524258185267,\n\t\t\"block_id\": 40\n\t}\n]"
 headers = {'content-type': 'application/json'}
@@ -653,7 +653,30 @@ response = requests.request("POST", url, data=payload, headers=headers, params=q
 print(response.text)
 ```
 
-This endpoint is used to upload/add new spots to the aspace database. It requires an `auth_key` with authority to upload parking spot statuses (`upload_spots`). The request body must be in the exact form as the code examples, or the request will fail. Upon the completion of a successful request, all the spots in the body will be added to the database with the given `block_id`. Upon success, the request will return the raw text `SUCCESS`. The `block_id` given in this request **does not** need to be unique for the request to be successful, but it is highly recommended to be unique.
+> Request Body:
+
+```json
+[
+  {
+    "lng": -122.32145622348536,
+    "lat": 47.61524252172283,
+    "block_id": 40
+  },
+  {
+    "lng": -122.32144809134007,
+    "lat": 47.61524258185267,
+    "block_id": 40
+  }
+]
+```
+
+> The above command returns the following:
+
+```json
+SUCCESS!
+```
+
+This endpoint is used to upload/add new spots to the aspace database. It requires an `auth_key` with authority to upload parking spot statuses (`upload_spots`). The request body must be in the exact form as the code examples, or the request will fail. Upon success, the request will return the raw text `SUCCESS`. The `block_id` given in the body of this request **does not** need to be unique for the request to be successful, but it is highly recommended to be unique.
 
 ### HTTP Request
 
@@ -663,5 +686,4 @@ This endpoint is used to upload/add new spots to the aspace database. It require
 
 | Parameter | Description                    |
 | --------- | ------------------------------ |
-| `block_id` | The block ID assigned to be assigned to the uploaded spots. |
 | `auth_key` | An auth_key that has the authority to upload new spots (`upload_spots`). |
