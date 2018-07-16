@@ -11,7 +11,7 @@ toc_footers:
   - <a href='https://trya.space/'>Main Website</a>
   - <a href='https://lab.trya.space/'>Data Lab</a>
   - <a href='https://api.trya.space/'>API</a>
-  - <a href="https://api.trya.space/key/">Auth Keys</a>
+  - <a href="https://api.trya.space/v1/admin/get_auth_key/">Auth Keys</a>
   - <a href='https://docs.trya.space/'>API Documentations</a>
 
 includes:
@@ -43,8 +43,12 @@ Because this API is still in active development, there may be inconsistencies wi
 The base URL for all API endpoints is: <a href="https://api.trya.space/v1"><b>https://api.trya.space/v1</b></a>
 </aside>
 
-<aside class="notice">
-For methods that require auth keys, you must go <a href="https://api.trya.space/key">here</a>. Use the username <b><code>aspace</code></b> and password <b><code>aspace-gen-key-2018</code></b> in the browser to view the webpage, then use the username and password you previously set for database authority.
+<aside class="warning">
+For methods that require auth keys, please go <a href="https://api.trya.space/v1/admin/get_auth_key">here</a>. Use your administration credentials to view the webpage, then enter one of the permissions listed below exactly as it appears:
+<ul>
+  <li><code>upload_spots</code></li>
+  <li><code>update_status</code></li>
+</ul>
 </aside>
 
 <aside class="warning">Methods require <b>all</b> parameters listed to successfully complete, unless otherwise specified.</aside>

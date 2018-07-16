@@ -1,11 +1,10 @@
 # Parking
 
-## Test Endpoint
+## Test Parking Sub-API (Ping)
 
 ```http
 GET /v1/parking/ping HTTP/1.1
 Host: api.trya.space
-Cache-Control: no-cache
 ```
 
 ```shell
@@ -23,7 +22,6 @@ request(options, function (error, response, body) {
 
   console.log(body);
 });
-
 ```
 
 ```python

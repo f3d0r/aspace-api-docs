@@ -22,6 +22,7 @@ Error Code | Meaning | HTTP Code
 23 | Pin expired - An expired PIN was sent as part of the request during the authentication. A new PIN must be requested and used. | 403
 24 | Invalid Spot ID - No parking spots exist with the given Spot ID exist in the database. | 404
 25 | Invalid Spot or Block ID - No parking spots exist with both the given Spot and Block IDs in the database. | 404
+26 | Invalid Permission - The permission that you requested or used is not a registered/valid permission. | 200
 
 The aspace API uses the following custom success codes indicating behavior that is intended:
 
