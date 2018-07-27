@@ -35,7 +35,7 @@ response = requests.request("GET", url, data=payload)
 print(response.text)
 ```
 
-> This endpoint returns the following JSON when functioning correctly:
+> Example JSON return:
 
 ```json
 {
@@ -46,6 +46,8 @@ print(response.text)
   "res_content": "pong"
 }
 ```
+
+This endpoint is to test the functionality/response of the Routing Sub-API.
 
 ### HTTP Request
 
@@ -122,7 +124,7 @@ response = requests.request("POST", url, data=payload, headers=headers)
 print(response.text)
 ```
 
-> This endpoint returns the following JSON when functioning correctly:
+> Example JSON return:
 
 ```json
 TO BE UPDATED

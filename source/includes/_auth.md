@@ -35,7 +35,7 @@ response = requests.request("GET", url, data=payload)
 print(response.text)
 ```
 
-> This endpoint returns the following JSON when functioning correctly:
+> Example JSON return:
 
 ```json
 {
@@ -46,6 +46,8 @@ print(response.text)
   "res_content": "pong"
 }
 ```
+
+This endpoint is to test the functionality/response of the Auth Sub-API.
 
 ### HTTP Request
 
@@ -93,7 +95,7 @@ response = requests.request("POST", url, data=payload, params=querystring)
 print(response.text)
 ```
 
-> The above command returns JSON structured like this:
+> Example JSON return:
 
 ```json
 {
@@ -165,7 +167,7 @@ response = requests.request("POST", url, data=payload, params=querystring)
 print(response.text)
 ```
 
-> The above command returns JSON structured like this:
+> Example JSON return:
 
 ```json
 {

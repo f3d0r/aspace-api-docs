@@ -41,7 +41,7 @@ response = requests.request("GET", url, data=payload, headers=headers)
 print(response.text)
 ```
 
-> This endpoint returns the following JSON when functioning correctly:
+> Example JSON return:
 
 ```json
 {
@@ -52,3 +52,11 @@ print(response.text)
   "res_content": "pong"
 }
 ```
+
+This endpoint is to test the functionality/response of the Admin Sub-API.
+
+### HTTP Request
+
+`GET https://api.trya.space/v1/admin/ping`
+
+<aside class="notice">If you are receiving an error with this endpoint for an extended period of time, please <a href="mailto:help@trya.space">send</a> the error you receive to the API admin.</aside>
