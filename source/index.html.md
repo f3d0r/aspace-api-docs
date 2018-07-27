@@ -13,11 +13,13 @@ toc_footers:
   - <a href='https://api.trya.space/'>API</a>
   - <a href="https://api.trya.space/v1/admin/get_auth_key/">Auth Keys</a>
   - <a href='https://docs.trya.space/'>API Documentations</a>
+  - <a href='https://buddy.trya.space/'>Buddy CI/CD</a>
 
 includes:
   - parking
-  - admin
+  - routing
   - auth
+  - admin
   - errors
 
 search: true

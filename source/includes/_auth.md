@@ -35,7 +35,17 @@ response = requests.request("GET", url, data=payload)
 print(response.text)
 ```
 
-This endpoint returns `pong` if the sub-API is working properly, and an error otherwise.
+> This endpoint returns the following JSON when functioning correctly:
+
+```json
+{
+  "res_info": {
+    "code": 33,
+    "code_info": "AUTH_ENDPOINT_FUNCTION_SUCCESS"
+  },
+  "res_content": "pong"
+}
+```
 
 ### HTTP Request
 
@@ -87,14 +97,14 @@ print(response.text)
 
 ```json
 {
-    "error": {
-        "error_code": 1,
-        "error_info": "new_phone"
-    }
+  "res_info": {
+    "code": 1,
+    "code_info": "NEW_PHONE"
+  }
 }
 ```
 
-This endpoint sends a text message with a verification PIN to the given `phone_number`, and uses this along with the unique `device_id` to allow a user to authenticate into their account. The next step of the authentication process is outlined in <a href="https://docs.trya.space/#check-pin">Check Pin</a>.
+This endpoint sends a text message with a verification PIN to the given `phone_number`, and uses this along with the unique `device_id` to allow a user to authenticate into their account. The next step of the authentication process is outlined in <a href="https://docs.trya.space/#check-pin">Check PIN</a>. If the `call_verify` query is set to `T`, the `phone_number` is called instead of texted, and the login/verification process continues identically.
 
 <aside class="notice">The format of <code>phone_number</code> does not need to be consistent, it is formatted automatically on the backend.</aside>
 
@@ -110,8 +120,9 @@ This endpoint sends a text message with a verification PIN to the given `phone_n
 | ------------------------- | --------------------------------------------- |
 | `phone_number` | The phone_number of the device used for the login process. |
 | `device_id` | The unique device id of the phone used for the login process. |
+| `call_verify` (Must be `T` or `F`) | If `T` (true), the user will be called (instead of texted) with their login PIN. Otherwise, the user will be texted with their PIN. |
 
-## Check Pin
+## Check PIN
 
 ```http
 POST /v1/auth/check_pin?phone_number=(206)372-1234&device_id=abcde&verify_pin=12345 HTTP/1.1
@@ -158,13 +169,13 @@ print(response.text)
 
 ```json
 {
-  "error": {
-    "error_code": 22,
-    "error_info": "new_access_code",
-    "info": {
-      "access_code": "eb6d7e1d83c1b65820173a4503c31aad",
-      "expiry": "2018-09-16 04:07:56"
-    }
+  "res_info": {
+    "code": 22,
+    "code_info": "NEW_ACCESS_CODE"
+  },
+  "res_content": {
+    "access_code": "dd3dc3146df82c5a2b1c54eb4648939f",
+    "expiry": "2018-09-27 16:56:30"
   }
 }
 ```

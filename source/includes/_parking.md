@@ -35,7 +35,17 @@ response = requests.request("GET", url, data=payload)
 print(response.text)
 ```
 
-This endpoint returns `pong` if the sub-API is working properly, and an error otherwise.
+> This endpoint returns the following JSON when functioning correctly:
+
+```json
+{
+  "res_info": {
+    "code": 34,
+    "code_info": "PARKING_ENDPOINT_FUNCTION_SUCCESS"
+  },
+  "res_content": "pong"
+}
+```
 
 ### HTTP Request
 
@@ -43,7 +53,7 @@ This endpoint returns `pong` if the sub-API is working properly, and an error ot
 
 <aside class="notice">If you are receiving an error with this endpoint for an extended period of time, please <a href="mailto:help@trya.space">send</a> the error you receive to the API admin.</aside>
 
-## Get Spots by ID
+## Select Spots by ID
 
 ```http
 GET /v1/parking/get_status?block_id=3 HTTP/1.1
@@ -85,24 +95,30 @@ print(response.text)
 > The above command returns JSON structured like this:
 
 ```json
-[
-  {
-    "lng": -122.31808264747308,
-    "lat": 47.61426461982815,
-    "occupied": "F",
-    "parking_price": 2.5,
-    "block_id": 3,
-    "spot_id": 2620
+{
+  "res_info": {
+    "code": 34,
+    "code_info": "PARKING_ENDPOINT_FUNCTION_SUCCESS"
   },
-  {
-    "lng": -122.31808272044786,
-    "lat": 47.61427558423165,
-    "occupied": "F",
-    "parking_price": 2.5,
-    "block_id": 3,
-    "spot_id": 2621
-  }
-]
+  "res_content": [
+    {
+      "lng": -122.31808264747308,
+      "lat": 47.61426461982815,
+      "occupied": "F",
+      "parking_price": 2.5,
+      "block_id": 3,
+      "spot_id": 2620
+    },
+    {
+      "lng": -122.31808272044786,
+      "lat": 47.61427558423165,
+      "occupied": "F",
+      "parking_price": 2.5,
+      "block_id": 3,
+      "spot_id": 2621
+    }
+  ]
+}
 ```
 
 This endpoint returns a subset of parking spots matching the given spot_id, block_id, or both.
@@ -120,7 +136,7 @@ This endpoint returns a subset of parking spots matching the given spot_id, bloc
 | `spot_id` (one required)  | The spot_id of the parking spot.              |
 | `block_id` (one required) | The block_id of a selection of parking spots. |
 
-## Get Spots in Bounding Box
+## Select Spots in BBox
 
 ```http
 POST /v1/parking/get_status_bbox HTTP/1.1
@@ -202,24 +218,30 @@ print(response.text)
 > The above command returns JSON structured like this:
 
 ```json
-[
-  {
-    "lng": -122.32080361279635,
-    "lat": 47.613874629189766,
-    "occupied": "N",
-    "parking_price": 3.25,
-    "block_id": 12,
-    "spot_id": 841
+{
+  "res_info": {
+    "code": 34,
+    "code_info": "PARKING_ENDPOINT_FUNCTION_SUCCESS"
   },
-  {
-    "lng": -122.32080411168269,
-    "lat": 47.613929450727575,
-    "occupied": "F",
-    "parking_price": 3.25,
-    "block_id": 12,
-    "spot_id": 842
-  }
-]
+  "res_content": [
+    {
+      "lng": -122.32080361279635,
+      "lat": 47.613874629189766,
+      "occupied": "N",
+      "parking_price": 3.25,
+      "block_id": 12,
+     "spot_id": 841
+    },
+    {
+      "lng": -122.32080411168269,
+      "lat": 47.613929450727575,
+      "occupied": "F",
+      "parking_price": 3.25,
+      "block_id": 12,
+      "spot_id": 842
+    }
+  ]
+}
 ```
 
 This endpoint returns a subset of parking spots that are inside of a bounding box formed by the southwest and northeast latitude/longitude pairs given in the body of the request.
@@ -234,7 +256,7 @@ This endpoint returns a subset of parking spots that are inside of a bounding bo
 
 See on right after sample code.
 
-## Get Spots in Radius
+## Select Spots in Radius
 
 ```http
 POST /v1/parking/get_status_radius?radius_feet=50 HTTP/1.1
@@ -301,26 +323,32 @@ print(response.text)
 > The above command returns JSON structured like this:
 
 ```json
-[
-  {
-    "lng": -122.32080361279635,
-    "lat": 47.613874629189766,
-    "occupied": "N",
-    "parking_price": 3.25,
-    "block_id": 12,
-    "spot_id": 841,
-    "distance": 0.00017698109149932864
+{
+  "res_info": {
+    "code": 34,
+    "code_info": "PARKING_ENDPOINT_FUNCTION_SUCCESS"
   },
-  {
-    "lng": -122.32080411168269,
-    "lat": 47.613929450727575,
-    "occupied": "F",
-    "parking_price": 3.25,
-    "block_id": 12,
-    "spot_id": 842,
-    "distance": 0.0038368586332700873
-  }
-]
+  "res_content": [
+    {
+      "lng": -122.32080361279635,
+      "lat": 47.613874629189766,
+      "occupied": "N",
+      "parking_price": 3.25,
+      "block_id": 12,
+      "spot_id": 841,
+      "distance": 0.00017698109149932864
+    },
+    {
+      "lng": -122.32080411168269,
+      "lat": 47.613929450727575,
+      "occupied": "F",
+      "parking_price": 3.25,
+      "block_id": 12,
+      "spot_id": 842,
+      "distance": 0.0038368586332700873
+    }
+  ]
+}
 ```
 
 This endpoint returns a subset of parking spots that are inside of a circle with radius (in feet) centered at the latitude/longitude pair given in the body.
@@ -337,7 +365,7 @@ This endpoint returns a subset of parking spots that are inside of a circle with
 | --------- | ------------------------------ |
 | `radius_feet` | The bounding circle's radius in feet. |
 
-## Get Min-Sized Spots in Radius
+## Select Min-Sized Spots
 
 ```http
 POST /v1/parking/get_min_size_parking?radius_feet=5000&spot_size_feet=10 HTTP/1.1
@@ -404,26 +432,32 @@ print(response.text)
 > The above command returns JSON structured like this:
 
 ```json
-[
-  {
-    "lng": -122.31808286639756,
-    "lat": 47.6142975130387,
-    "occupied": "F",
-    "parking_price": 2.5,
-    "block_id": 3,
-    "spot_id": 2623,
-    "distance": 0.12990350497275932
+{
+  "res_info": {
+    "code": 34,
+    "code_info": "PARKING_ENDPOINT_FUNCTION_SUCCESS"
   },
-  {
-    "lng": -122.31808323127233,
-    "lat": 47.614352335056275,
-    "occupied": "F",
-    "parking_price": 2.5,
-    "block_id": 3,
-    "spot_id": 2628,
-    "distance": 0.13079241931625346
-  }
-]
+  "res_content": [
+    {
+      "lng": -122.31808286639756,
+      "lat": 47.6142975130387,
+      "occupied": "F",
+      "parking_price": 2.5,
+      "block_id": 3,
+      "spot_id": 2623,
+      "distance": 0.12990350497275932
+    },
+    {
+      "lng": -122.31808323127233,
+      "lat": 47.614352335056275,
+      "occupied": "F",
+      "parking_price": 2.5,
+      "block_id": 3,
+      "spot_id": 2628,
+      "distance": 0.13079241931625346
+    }
+  ]
+}
 ```
 
 This endpoint returns a subset of parking spots that are inside of a circle with radius (in feet) centered at the latitude/longitude pair given in the body and are large enough for a car of `spot_size_feet`.
@@ -488,7 +522,13 @@ print(response.text)
 
 ```json
 {
-  "block_id_exists": "T"
+  "res_info": {
+    "code": 34,
+    "code_info": "PARKING_ENDPOINT_FUNCTION_SUCCESS"
+  },
+  "res_content": {
+    "block_id_exists": "T"
+  }
 }
 ```
 
@@ -553,9 +593,9 @@ print(response.text)
 
 ```json
 {
-  "error": {
-    "error_code": 19,
-    "error_info": "spot_status_changed"
+  "res_info": {
+    "code": 19,
+    "code_info": "SPOT_STATUS_CHANGED"
   }
 }
 ```
@@ -622,7 +662,7 @@ var options = { method: 'POST',
   url: 'https://api.trya.space/v1/parking/upload_spots',
   qs: { auth_key: 'some-auth-key' },
   headers: { 'content-type': 'application/json' },
-  body: 
+  body:
    [ { lng: -122.32145622348536,
        lat: 47.61524252172283,
        block_id: 40 },
@@ -673,7 +713,13 @@ print(response.text)
 > The above command returns the following:
 
 ```json
-SUCCESS!
+{
+  "res_info": {
+    "code": 34,
+    "code_info": "PARKING_ENDPOINT_FUNCTION_SUCCESS"
+  },
+  "res_content": "SUCCESS!"
+}
 ```
 
 This endpoint is used to upload/add new spots to the aspace database. It requires an `auth_key` with authority to upload parking spot statuses (`upload_spots`). The request body must be in the exact form as the code examples, or the request will fail. Upon success, the request will return the raw text `SUCCESS`. The `block_id` given in the body of this request **does not** need to be unique for the request to be successful, but it is highly recommended to be unique.

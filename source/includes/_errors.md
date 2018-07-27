@@ -9,7 +9,7 @@ The aspace API uses the following custom error codes indicating behavior that is
 Error Code | Meaning | HTTP Code
 ---------- | ------- | ---------
 -1 | Missing Parameter - Your request is missing a parameter, specified in the info part of the return body. | 422
-4 | Invalid Pin - The pin given doesn't match the one sent during the authentication process. | 200
+4 | Invalid PIN - The PIN given doesn't match the one sent during the authentication process. | 200
 5 | Database Error - An error occurred on the backend during the query resulting in an error. | 500
 12 | Invalid Phone - The phone given is not valid. | 200
 13 | Invalid Auth Key - The authority key to complete the following request is not valid. | 403
@@ -19,7 +19,7 @@ Error Code | Meaning | HTTP Code
 18 | Authority Key Not Added - The authority key and requested permissions were not successfully added due to an unauthorized permission. | 403
 20 | Missing Body - The request requires a body, but one was not sent with the request. | 422
 21 | Invalid Occupancy Status - An invalid occupancy status was given as part of the request. Only "T", "F", and "N" are allowed. | 422
-23 | Pin expired - An expired PIN was sent as part of the request during the authentication. A new PIN must be requested and used. | 403
+23 | PIN Expired - An expired PIN was sent as part of the request during the authentication. A new PIN must be requested and used. | 403
 24 | Invalid Spot ID - No parking spots exist with the given Spot ID exist in the database. | 404
 25 | Invalid Spot or Block ID - No parking spots exist with both the given Spot and Block IDs in the database. | 404
 26 | Invalid Permission - The permission that you requested or used is not a registered/valid permission. | 200
@@ -33,3 +33,8 @@ Success Code | Meaning | HTTP Code
 17 | Authority Key Added - The authority key and requested permissions were successfully added. | 200
 19 | Spot Status Changed - The given spot_id's status was successfully changed to the given occupancy status. | 200
 22 | New Access Code - A new access code was issued for the user at the end of the authentication process. | 200
+30 | Main Endpoint Function Success - The Main endpoint is functioning as intended. | 200
+31 | Routing Endpoint Function Success - The Routing endpoint is functioning as intended. | 200
+32 | Admin Endpoint Function Success - The Admin endpoint is functioning as intended. | 200
+33 | Auth Endpoint Function Success - The Auth endpoint is functioning as intended. | 200
+34 | Parking Endpoint Function Success - The Parking endpoint is functioning as intended. | 200
