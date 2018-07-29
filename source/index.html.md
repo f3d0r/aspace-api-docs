@@ -43,7 +43,15 @@ Because this API is still in active development, there may be inconsistencies wi
 * Any error codes you received that aren't documented in this API documentation
 
 <aside class="notice">
-The base URL for all API endpoints is: <a href="https://api.trya.space/v1"><b>https://api.trya.space/v1</b></a>
+The base URLs for APIs are:
+<br>
+&emsp;&ensp;<b>Production</b> (Live/Release) API: <a href="https://api.trya.space/v1"><b>https://api.trya.space/v1</b></a>
+<br>
+&emsp;&ensp;<b>Development</b> API: <a href="https://api-dev.trya.space/v1"><b>https://api-dev.trya.space/v1</b></a>
+</aside>
+
+<aside class="warning">
+Please note that this documentation is only up-to-date with the <b>production</b> API. The development API may not behave as described in this documentation.
 </aside>
 
 <aside class="warning">
@@ -53,5 +61,3 @@ For methods that require auth keys, please go <a href="https://api.trya.space/v1
   <li><code>update_status</code></li>
 </ul>
 </aside>
-
-<aside class="warning">Methods require <b>all</b> parameters listed to successfully complete, unless otherwise specified.</aside>
