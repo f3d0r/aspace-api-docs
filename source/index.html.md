@@ -8,7 +8,8 @@ language_tabs:
   - python: Python
 
 toc_footers:
-  - <a href='https://api.trya.space/'>API</a>
+  - <a href='https://api.trya.space/v1'>API (Production)</a>
+  - <a href='https://api-dev.trya.space/v1'>API (Development)</a>
   - <a href='https://docs.trya.space/'>API Documentation</a>
   - <a href='https://status.trya.space/'>API Status</a>
   - <a href="https://api.trya.space/v1/admin/get_auth_key/">Auth Keys</a>
