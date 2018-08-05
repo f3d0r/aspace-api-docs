@@ -4,11 +4,10 @@
 Please note that there error/success codes are split into two sections based on intended and not normal behavior.
 </aside>
 
-The aspace API uses the following custom error codes indicating behavior that isn't normal:
+The aspace API uses the following error codes to indicate behavior that isn't normal:
 
 Error Code | Meaning | HTTP Code
 ---------- | ------- | ---------
--1 | Missing Parameter - Your request is missing a parameter, specified in the info part of the return body. | 422
 4 | Invalid PIN - The PIN given doesn't match the one sent during the authentication process. | 200
 5 | Database Error - An error occurred on the backend during the query resulting in an error. | 500
 12 | Invalid Phone - The phone given is not valid. | 200
@@ -23,8 +22,18 @@ Error Code | Meaning | HTTP Code
 24 | Invalid Spot ID - No parking spots exist with the given Spot ID exist in the database. | 404
 25 | Invalid Spot or Block ID - No parking spots exist with both the given Spot and Block IDs in the database. | 404
 26 | Invalid Permission - The permission that you requested or used is not a registered/valid permission. | 200
+39 | Invalid Vehicle ID - The vehicle ID you are attempting to remove doesn't exist. | 200
 
-The aspace API uses the following custom success codes indicating behavior that is intended:
+The aspace API uses the following error codes to indicate requests that are made with invalid/incomplete parameters:
+
+Error Code | Meaning | HTTP Code
+---------- | ------- | ---------
+-1 | Missing Parameter - Your request is missing a parameter, specified in the info part of the return body. | 422
+-2 | Invalid Access Code - Your request is attempting to use an invalid access_code/device_id combination. | 200
+-3 | Expired Access Code - Your request is attempting to use an expired access_code/device_id combination. | 200
+-5 | Multi-Part Body Missing - The endpoint method you are calling requires a multi-part body with a key that is missing from your request. | 422
+
+The aspace API uses the following success codes to indicate behavior that is intended:
 
 Success Code | Meaning | HTTP Code
 ------------ | ------- | ---------
@@ -38,3 +47,7 @@ Success Code | Meaning | HTTP Code
 32 | Admin Endpoint Function Success - The Admin endpoint is functioning as intended. | 200
 33 | Auth Endpoint Function Success - The Auth endpoint is functioning as intended. | 200
 34 | Parking Endpoint Function Success - The Parking endpoint is functioning as intended. | 200
+35 | User Endpoint Function Success - The User endpoint is functioning as intended. | 200
+36 | Profile Pic Exists - The profile picture of the user matching the access_code and device_id given exists at a given URL. | 200
+37 | Profile Pic Null - The profile picture of the user matching the access_code and device_id doesn't exist and/or has never been updated. | 200
+38 | Profile Pic Updated - The profile picture of the user matching the access_code and device_id has been successfully updated. | 200
