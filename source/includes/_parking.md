@@ -47,7 +47,7 @@ print(response.text)
 }
 ```
 
-This endpoint is to test the functionality/response of the Parking Sub-API.
+This endpoint is used to test the functionality/response of the Parking Sub-API.
 
 ### HTTP Request
 

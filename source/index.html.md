@@ -21,6 +21,7 @@ includes:
   - parking
   - routing
   - auth
+  - user
   - admin
   - errors
 

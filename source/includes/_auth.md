@@ -47,7 +47,7 @@ print(response.text)
 }
 ```
 
-This endpoint is to test the functionality/response of the Auth Sub-API.
+This endpoint is used to test the functionality/response of the Auth Sub-API.
 
 ### HTTP Request
 

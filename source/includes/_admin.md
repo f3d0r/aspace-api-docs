@@ -53,7 +53,7 @@ print(response.text)
 }
 ```
 
-This endpoint is to test the functionality/response of the Admin Sub-API.
+This endpoint is used to test the functionality/response of the Admin Sub-API.
 
 ### HTTP Request
 
