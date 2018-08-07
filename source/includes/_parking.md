@@ -58,20 +58,20 @@ This endpoint is used to test the functionality/response of the Parking Sub-API.
 ## Select Spots by ID
 
 ```http
-GET /v1/parking/get_status?block_id=3 HTTP/1.1
+GET /v1/parking/get_status/json?block_id=3 HTTP/1.1
 Host: api.trya.space
 ```
 
 ```shell
 curl --request GET \
-  --url 'https://api.trya.space/v1/parking/get_status?block_id=3'
+  --url 'https://api.trya.space/v1/parking/get_status/json?block_id=3'
 ```
 
 ```javascript
 var request = require("request");
 
 var options = { method: 'GET',
-  url: 'https://api.trya.space/v1/parking/get_status',
+  url: 'https://api.trya.space/v1/parking/get_status/json',
   qs: { block_id: '3' } };
 
 request(options, function (error, response, body) {
@@ -84,7 +84,7 @@ request(options, function (error, response, body) {
 ```python
 import requests
 
-url = "https://api.trya.space/v1/parking/get_status"
+url = "https://api.trya.space/v1/parking/get_status/json"
 
 querystring = {"block_id":"3"}
 
@@ -129,7 +129,13 @@ This endpoint returns a subset of parking spots matching the given spot_id, bloc
 
 ### HTTP Request
 
-`GET https://api.trya.space/v1/parking/get_status`
+`GET https://api.trya.space/v1/parking/get_status/OUTPUT_TYPE`
+
+### Path Parameters
+
+| Parameter                 | Description                                   |
+| ------------------------- | --------------------------------------------- |
+| `OUTPUT_TYPE` | Output format desired, `json` or `geojson` is possible. |
 
 ### URL Parameters
 
@@ -141,7 +147,7 @@ This endpoint returns a subset of parking spots matching the given spot_id, bloc
 ## Select Spots in BBox
 
 ```http
-POST /v1/parking/get_status_bbox HTTP/1.1
+POST /v1/parking/get_status_bbox/json HTTP/1.1
 Host: api.trya.space
 Content-Type: application/json
 Content-Length: 84
@@ -159,7 +165,7 @@ Content-Length: 84
 
 ```shell
 curl --request POST \
-  --url https://api.trya.space/v1/parking/get_status_bbox \
+  --url https://api.trya.space/v1/parking/get_status_bbox/json \
   --header 'content-type: application/json' \
   --data '{
   "sw": {
@@ -177,7 +183,7 @@ curl --request POST \
 var request = require("request");
 
 var options = { method: 'POST',
-  url: 'https://api.trya.space/v1/parking/get_status_bbox',
+  url: 'https://api.trya.space/v1/parking/get_status_bbox/json',
   headers: { 'content-type': 'application/json' },
   body: { sw: { lng: -180, lat: -180 }, ne: { lng: 180, lat: 180 } },
   json: true };
@@ -192,7 +198,7 @@ request(options, function (error, response, body) {
 ```python
 import requests
 
-url = "https://api.trya.space/v1/parking/get_status_bbox"
+url = "https://api.trya.space/v1/parking/get_status_bbox/json"
 
 payload = "{\n\t\"sw\": {\n\t\t\"lng\": -180,\n\t\t\"lat\": -180\n\t},\n\t\"ne\": {\n\t\t\"lng\": 180,\n\t\t\"lat\": 180\n\t}\n}"
 headers = {'content-type': 'application/json'}
@@ -252,7 +258,13 @@ This endpoint returns a subset of parking spots that are inside of a bounding bo
 
 ### HTTP Request
 
-`POST https://api.trya.space/v1/parking/get_status_bbox`
+`POST https://api.trya.space/v1/parking/get_status_bbox/OUTPUT_TYPE`
+
+### Path Parameters
+
+| Parameter                 | Description                                   |
+| ------------------------- | --------------------------------------------- |
+| `OUTPUT_TYPE` | Output format desired, `json` or `geojson` is possible. |
 
 ### Request Body
 
@@ -261,7 +273,7 @@ See on right after sample code.
 ## Select Spots in Radius
 
 ```http
-POST /v1/parking/get_status_radius?radius_feet=50 HTTP/1.1
+POST /v1/parking/get_status_radius/json?radius_feet=50 HTTP/1.1
 Host: api.trya.space
 Content-Type: application/json
 Content-Length: 40
@@ -273,7 +285,7 @@ Content-Length: 40
 
 ```shell
 curl --request POST \
-  --url 'https://api.trya.space/v1/parking/get_status_radius?radius_feet=50' \
+  --url 'https://api.trya.space/v1/parking/get_status_radius/json?radius_feet=50' \
   --header 'content-type: application/json' \
   --data '{
   "lng": -122.3208,
@@ -285,7 +297,7 @@ curl --request POST \
 var request = require("request");
 
 var options = { method: 'POST',
-  url: 'https://api.trya.space/v1/parking/get_status_radius',
+  url: 'https://api.trya.space/v1/parking/get_status_radius/json',
   qs: { radius_feet: '50' },
   headers: { 'content-type': 'application/json' },
   body: { lng: -122.3208, lat: 47.613874 },
@@ -301,7 +313,7 @@ request(options, function (error, response, body) {
 ```python
 import requests
 
-url = "https://api.trya.space/v1/parking/get_status_radius"
+url = "https://api.trya.space/v1/parking/get_status_radius/json"
 
 querystring = {"radius_feet":"50"}
 
@@ -359,7 +371,13 @@ This endpoint returns a subset of parking spots that are inside of a circle with
 
 ### HTTP Request
 
-`POST https://api.trya.space/v1/parking/get_status_radius`
+`POST https://api.trya.space/v1/parking/get_status_radius/OUTPUT_TYPE`
+
+### Path Parameters
+
+| Parameter                 | Description                                   |
+| ------------------------- | --------------------------------------------- |
+| `OUTPUT_TYPE` | Output format desired, `json` or `geojson` is possible. |
 
 ### URL Parameters
 
@@ -370,7 +388,7 @@ This endpoint returns a subset of parking spots that are inside of a circle with
 ## Select Min-Sized Spots
 
 ```http
-POST /v1/parking/get_min_size_parking?radius_feet=5000&spot_size_feet=10 HTTP/1.1
+POST /v1/parking/get_min_size_parking/json?radius_feet=5000&spot_size_feet=10 HTTP/1.1
 Host: api.trya.space
 Content-Type: application/json
 Content-Length: 41
@@ -382,7 +400,7 @@ Content-Length: 41
 
 ```shell
 curl --request POST \
-  --url 'https://api.trya.space/v1/parking/get_min_size_parking?radius_feet=5000&spot_size_feet=10' \
+  --url 'https://api.trya.space/v1/parking/get_min_size_parking/json?radius_feet=5000&spot_size_feet=10' \
   --header 'content-type: application/json' \
   --data '{
   "lng": -122.3208,
@@ -394,7 +412,7 @@ curl --request POST \
 var request = require("request");
 
 var options = { method: 'POST',
-  url: 'https://api.trya.space/v1/parking/get_min_size_parking',
+  url: 'https://api.trya.space/v1/parking/get_min_size_parking/json',
   qs: { radius_feet: '5000', spot_size_feet: '10' },
   headers: { 'content-type': 'application/json' },
   body: { lng: -122.3208, lat: 47.613874 },
@@ -410,7 +428,7 @@ request(options, function (error, response, body) {
 ```python
 import requests
 
-url = "https://api.trya.space/v1/parking/get_min_size_parking"
+url = "https://api.trya.space/v1/parking/get_min_size_parking/json"
 
 querystring = {"radius_feet":"5000","spot_size_feet":"10"}
 
@@ -468,7 +486,13 @@ This endpoint returns a subset of parking spots that are inside of a circle with
 
 ### HTTP Request
 
-`POST https://api.trya.space/v1/parking/get_status_radius`
+`POST https://api.trya.space/v1/parking/get_status_radius/OUTPUT_TYPE`
+
+### Path Parameters
+
+| Parameter                 | Description                                   |
+| ------------------------- | --------------------------------------------- |
+| `OUTPUT_TYPE` | Output format desired, `json` or `geojson` is possible. |
 
 ### URL Parameters
 
