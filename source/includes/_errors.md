@@ -9,13 +9,10 @@ The aspace API uses the following error codes to indicate behavior that isn't no
 Error Code | Meaning | HTTP Code
 ---------- | ------- | ---------
 4 | <b>Invalid PIN</b> - The PIN given doesn't match the one sent during the authentication process. | 200
-5 | <b>Database Error</b> - An error occurred on the backend during the query resulting in an error. | 500
 12 | <b>Invalid Phone</b> - The phone given is not valid. | 200
 13 | <b>Invalid Auth Key</b> - The authority key to complete the following request is not valid. | 403
-14 | <b>Missing Auth Key</b> - The request requires an authority key, but one was never sent as part of the request. | 401
 15 | <b>Invalid Spot ID</b> - The parking spot id given doesn't exist within the database.
 16 | <b>Invalid Basic Authentication</b> - The credentials given for the method's basic authentication are invalid. | 401
-18 | <b>Authority Key Not Added</b> - The authority key and requested permissions were not successfully added due to an unauthorized permission. | 403
 20 | <b>Missing Body</b> - The request requires a body, but one was not sent with the request. | 422
 21 | <b>Invalid Occupancy Status</b> - An invalid occupancy status was given as part of the request. Only "T", "F", and "N" are allowed. | 422
 23 | <b>PIN Expired</b> - An expired PIN was sent as part of the request during the authentication. A new PIN must be requested and used. | 403
