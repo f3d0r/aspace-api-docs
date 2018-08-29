@@ -146,6 +146,6 @@ This endpoint returns a list of route waypoints (latitude and longitude pairs) t
 
 ### HTTP Request
 
-`POST https://api.trya.space/api/v1/routing/get_route_waypoints`
+`POST https://api.trya.space/v1/routing/get_route_waypoints`
 
 <aside class="notice">Due to the nature of the long calculations made on the back-end when this endpoint is called, it may take much longer to receive results of this method compared to other endpoints in the aspace API.</aside>
