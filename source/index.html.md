@@ -11,11 +11,13 @@ toc_footers:
   - <a href='https://api.trya.space/v1'>API (Production)</a>
   - <a href='https://api-dev.trya.space/v1'>API (Development)</a>
   - <a href='https://docs.trya.space/'>API Documentation</a>
+  - <a href='http://project-osrm.org/docs/v5.15.2/api/'>Router Engine API Documentation</a>
   - <a href='https://status.trya.space/'>API Status</a>
   - <a href="https://api.trya.space/v1/admin/get_auth_key/">Auth Keys</a>
   - <a href='https://buddy.trya.space/'>Buddy CI/CD</a>
   - <a href='https://lab.trya.space/'>Data Lab</a>
   - <a href='https://trya.space/'>Main Website</a>
+  - <a href='https://router-map.trya.space/'>Router Engine Map</a>
 
 includes:
   - parking
