@@ -55,7 +55,7 @@ This endpoint is used to test the functionality/response of the Routing Sub-API.
 
 <aside class="notice">If you are receiving an error with this endpoint for an extended period of time, please <a href="mailto:help@trya.space">send</a> the error you receive to the API admin.</aside>
 
-## Get Drive-Walk, Drive-Bike, or Drive-Direct Route
+## Get Route Options
 
 ```http
 POST /v1/get_drive_walk_route?origin_lat=47.7930&origin_lng=-122.3584&dest_lat=47.6057&dest_lng=-122.3336 HTTP/1.1
