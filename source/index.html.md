@@ -8,8 +8,6 @@ language_tabs:
   - python: Python
 
 toc_footers:
-  - <a href='https://api.trya.space/v1'>API (Production)</a>
-  - <a href='https://api-dev.trya.space/v1'>API (Development)</a>
   - <a href='https://docs.trya.space/'>API Documentation</a>
   - <a href='http://project-osrm.org/docs/v5.15.2/api/'>Router Engine API Documentation</a>
   - <a href='https://status.trya.space/'>API Status</a>
@@ -17,11 +15,14 @@ toc_footers:
   - <a href='https://buddy.trya.space/'>Buddy CI/CD</a>
   - <a href='https://lab.trya.space/'>Data Lab</a>
   - <a href='https://trya.space/'>Main Website</a>
-  - <a href='https://router-map.trya.space/'>Router Engine Map</a>
+  - <a href='https://router-map.trya.space/car'>Router Engine Map (Car)</a>
+  - <a href='https://router-map.trya.space/bike'>Router Engine Map (Bike)</a>
+  - <a href='https://router-map.trya.space/walk'>Router Engine Map (Walk)</a>
 
 includes:
   - parking
   - routing
+  - routing_engine
   - auth
   - user
   - admin

@@ -55,18 +55,6 @@ This endpoint is used to test the functionality/response of the Routing Sub-API.
 
 <aside class="notice">If you are receiving an error with this endpoint for an extended period of time, please <a href="mailto:help@trya.space">send</a> the error you receive to the API admin.</aside>
 
-## Routing Engine
-
-The aspace (Project-OSRM) Routing Engine endpoint is located at [https://api.trya.space/v1/routing/engine](https://api.trya.space/v1/routing/engine).
-
-All response and request formats are specified in Project-OSRM original documentation available [here](http://project-osrm.org/docs/v5.15.2/api).
-
-<aside class="warning">The cache of requests is cleared and the server is reloaded every day at 2AM PDT. During this time, the Routing Engine may be unavailable for about one minute.</aside>
-
-### HTTP Request
-
-`GET https://api.trya.space/v1/routing/engine`
-
 ## Get Routing Waypoints
 
 ```http
@@ -145,7 +133,3 @@ TO BE UPDATED
 This endpoint returns a list of route waypoints (latitude and longitude pairs) that are a best-fit along a user's route in accordance with a user's current origin and destination.
 
 ### HTTP Request
-
-`POST https://api.trya.space/v1/routing/get_route_waypoints`
-
-<aside class="notice">Due to the nature of the long calculations made on the back-end when this endpoint is called, it may take much longer to receive results of this method compared to other endpoints in the aspace API.</aside>
