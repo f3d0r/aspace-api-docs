@@ -1,5 +1,5 @@
 ---
-title: aspace, Inc. API
+title: aspace, Inc. API Docs
 
 language_tabs:
   - http: HTTP
