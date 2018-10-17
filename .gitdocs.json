@@ -1,6 +1,6 @@
 {
     "name": "aspace API Docs",
-    "root": ".",
+    "root": "src",
     "output": "build",
     "logo": "assets/banner_logo.png",
     "baseURL": "/",
