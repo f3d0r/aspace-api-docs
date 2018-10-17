@@ -1,4 +1,18 @@
 {
-  "name": "docs",
-  "root": "."
+    "name": "aspace API Docs",
+    "root": ".",
+    "output": "build",
+    "logo": "assets/banner_logo.png",
+    "baseURL": "/",
+    "domain": "https://status.trya.space",
+    "crawlable": false,
+    "host": "localhost",
+    "port": 8000,
+    "theme": "default",
+    "breadcrumbs": true,
+    "prefix_titles": false,
+    "table_of_contents.page": true,
+    "table_of_contents.folder": true,
+    "syntax.renderer": "hljs",
+    "syntax.lineNumbers": true
 }
