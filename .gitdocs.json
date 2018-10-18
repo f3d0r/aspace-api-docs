@@ -4,7 +4,7 @@
     "output": "build",
     "logo": "assets/banner_logo.png",
     "baseURL": "/",
-    "domain": "https://status.trya.space",
+    "domain": "https://docs.trya.space",
     "crawlable": false,
     "host": "localhost",
     "port": 8000,
