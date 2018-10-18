@@ -67,4 +67,3 @@ For methods that require auth keys, please go <a href="https://api.trya.space/v1
   <li><code>update_status</code></li>
 </ul>
 </aside>
-
